@@ -25,7 +25,7 @@
 ## Installation
 
 ```bash
-npm install mjmx
+npm install @mjmx/core
 ```
 
 ## Usage
@@ -36,7 +36,7 @@ Configure your `tsconfig.json`:
 {
   "compilerOptions": {
     "jsx": "react-jsx",
-    "jsxImportSource": "mjmx"
+    "jsxImportSource": "@mjmx/core"
   }
 }
 ```
@@ -44,13 +44,13 @@ Configure your `tsconfig.json`:
 Or use the pragma comment:
 
 ```tsx
-/** @jsxImportSource mjmx */
+/** @jsxImportSource @mjmx/core */
 ```
 
 ### Example
 
 ```tsx
-import { render } from 'mjmx';
+import { render } from '@mjmx/core';
 
 const Email = ({ name }: { name: string }) => (
   <mjml>

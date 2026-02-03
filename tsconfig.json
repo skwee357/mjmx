@@ -18,12 +18,12 @@
     "rootDir": "./src",
     "outDir": "./dist",
     "jsx": "react-jsx",
-    "jsxImportSource": "mjmx",
+    "jsxImportSource": "@mjmx/core",
     "baseUrl": ".",
     "paths": {
-      "mjmx": ["./src/index.ts"],
-      "mjmx/jsx-runtime": ["./src/jsx-runtime.ts"],
-      "mjmx/jsx-dev-runtime": ["./src/jsx-dev-runtime.ts"]
+      "@mjmx/core": ["./src/index.ts"],
+      "@mjmx/core/jsx-runtime": ["./src/jsx-runtime.ts"],
+      "@mjmx/core/jsx-dev-runtime": ["./src/jsx-dev-runtime.ts"]
     },
     "types": ["vitest/globals", "node"]
   },
