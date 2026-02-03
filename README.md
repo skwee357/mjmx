@@ -6,6 +6,12 @@
     <b>No dependency on react</b>
 </p>
 
+<div align="center">
+    <a href="https://codecov.io/gh/skwee357/mjmx">
+        <img src="https://codecov.io/gh/skwee357/mjmx/branch/main/graph/badge.svg" alt="codecov">
+    </a>
+</div>
+
 > This project was developed with the help of [Claude Code](https://claude.ai/).
 
 ## Table of Contents
