@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2022", "DOM"],
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noUncheckedIndexedAccess": true,
+    "noEmit": true,
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "jsx": "react-jsx",
+    "jsxImportSource": "mjmx",
+    "baseUrl": ".",
+    "paths": {
+      "mjmx": ["./src/index.ts"],
+      "mjmx/jsx-runtime": ["./src/jsx-runtime.ts"],
+      "mjmx/jsx-dev-runtime": ["./src/jsx-dev-runtime.ts"]
+    },
+    "types": ["vitest/globals", "node"]
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}

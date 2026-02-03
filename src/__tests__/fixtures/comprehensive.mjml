@@ -1,0 +1,80 @@
+<mjml lang="en">
+  <mj-head>
+    <mj-title>Welcome Email</mj-title>
+    <mj-preview>Preview text for email clients</mj-preview>
+    <mj-font name="Roboto" href="https://fonts.googleapis.com/css?family=Roboto:400,700" />
+    <mj-breakpoint width="480px" />
+    <mj-attributes>
+      <mj-all font-family="Roboto, Arial, sans-serif" />
+      <mj-class name="blue" color="#007bff" />
+    </mj-attributes>
+    <mj-style>.custom-class { color: red; }</mj-style>
+  </mj-head>
+  <mj-body background-color="#f4f4f4">
+    <mj-wrapper padding="20px">
+      <mj-section background-color="#ffffff" padding="20px">
+        <mj-column width="100%">
+          <mj-image src="https://example.com/logo.png" alt="Logo" width="150px" />
+          <mj-text font-size="24px" font-weight="bold">Welcome to Our Service</mj-text>
+          <mj-divider border-color="#007bff" />
+        </mj-column>
+      </mj-section>
+    </mj-wrapper>
+    <mj-section padding="20px">
+      <mj-group>
+        <mj-column width="50%">
+          <mj-text>Left column content</mj-text>
+          <mj-button href="https://example.com/action" background-color="#007bff">Click Here</mj-button>
+        </mj-column>
+        <mj-column width="50%">
+          <mj-text>Right column content</mj-text>
+          <mj-spacer height="20px" />
+        </mj-column>
+      </mj-group>
+    </mj-section>
+    <mj-section padding="10px">
+      <mj-column>
+        <mj-social mode="horizontal">
+          <mj-social-element name="facebook" href="https://facebook.com/example">Facebook</mj-social-element>
+          <mj-social-element name="twitter" href="https://twitter.com/example">Twitter</mj-social-element>
+        </mj-social>
+      </mj-column>
+    </mj-section>
+    <mj-section padding="10px">
+      <mj-column>
+        <mj-navbar>
+          <mj-navbar-link href="https://example.com/home">Home</mj-navbar-link>
+          <mj-navbar-link href="https://example.com/about">About</mj-navbar-link>
+        </mj-navbar>
+      </mj-column>
+    </mj-section>
+    <mj-section padding="10px">
+      <mj-column>
+        <mj-accordion>
+          <mj-accordion-element>
+            <mj-accordion-title>Question 1</mj-accordion-title>
+            <mj-accordion-text>Answer to question 1</mj-accordion-text>
+          </mj-accordion-element>
+          <mj-accordion-element>
+            <mj-accordion-title>Question 2</mj-accordion-title>
+            <mj-accordion-text>Answer to question 2</mj-accordion-text>
+          </mj-accordion-element>
+        </mj-accordion>
+      </mj-column>
+    </mj-section>
+    <mj-hero mode="fixed-height" height="300px" background-url="https://example.com/hero.jpg" background-color="#ffffff">
+      <mj-text font-size="32px" color="#ffffff">Hero Section</mj-text>
+      <mj-button href="https://example.com/cta">Call to Action</mj-button>
+    </mj-hero>
+    <mj-section padding="10px">
+      <mj-column>
+        <mj-table>Name | Value</mj-table>
+      </mj-column>
+    </mj-section>
+    <mj-section padding="10px">
+      <mj-column>
+        <mj-raw>Custom content here</mj-raw>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
