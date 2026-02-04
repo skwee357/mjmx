@@ -1,5 +1,13 @@
 import { createNode, Fragment, type MjmlChild, type MjmlNode } from './ast';
 import type {
+  HtmlAnchorAttributes,
+  HtmlGlobalAttributes,
+  HtmlImgAttributes,
+  HtmlListAttributes,
+  HtmlMetaAttributes,
+  HtmlTableCellAttributes,
+} from './html-types';
+import type {
   MjAccordionAttributes,
   MjAccordionElementAttributes,
   MjAccordionTextAttributes,
@@ -117,5 +125,49 @@ export namespace JSX {
     'mj-include': MjIncludeAttributes;
     'mj-selector': PropsWithChildren<MjSelectorAttributes>;
     'mj-html-attribute': PropsWithChildren<MjHtmlAttributeAttributes>;
+
+    // HTML inline text elements (for mj-text)
+    a: PropsWithChildren<HtmlAnchorAttributes>;
+    span: PropsWithChildren<HtmlGlobalAttributes>;
+    strong: PropsWithChildren<HtmlGlobalAttributes>;
+    b: PropsWithChildren<HtmlGlobalAttributes>;
+    em: PropsWithChildren<HtmlGlobalAttributes>;
+    i: PropsWithChildren<HtmlGlobalAttributes>;
+    u: PropsWithChildren<HtmlGlobalAttributes>;
+    s: PropsWithChildren<HtmlGlobalAttributes>;
+    small: PropsWithChildren<HtmlGlobalAttributes>;
+    code: PropsWithChildren<HtmlGlobalAttributes>;
+    sub: PropsWithChildren<HtmlGlobalAttributes>;
+    sup: PropsWithChildren<HtmlGlobalAttributes>;
+    br: HtmlGlobalAttributes;
+
+    // HTML block text elements (for mj-text)
+    div: PropsWithChildren<HtmlGlobalAttributes>;
+    p: PropsWithChildren<HtmlGlobalAttributes>;
+    h1: PropsWithChildren<HtmlGlobalAttributes>;
+    h2: PropsWithChildren<HtmlGlobalAttributes>;
+    h3: PropsWithChildren<HtmlGlobalAttributes>;
+    h4: PropsWithChildren<HtmlGlobalAttributes>;
+    h5: PropsWithChildren<HtmlGlobalAttributes>;
+    h6: PropsWithChildren<HtmlGlobalAttributes>;
+    ul: PropsWithChildren<HtmlListAttributes>;
+    ol: PropsWithChildren<HtmlListAttributes>;
+    li: PropsWithChildren<HtmlGlobalAttributes>;
+    blockquote: PropsWithChildren<HtmlGlobalAttributes>;
+    pre: PropsWithChildren<HtmlGlobalAttributes>;
+    hr: HtmlGlobalAttributes;
+
+    // HTML table elements (for mj-table - use mj-table instead of <table>)
+    tr: PropsWithChildren<HtmlGlobalAttributes>;
+    td: PropsWithChildren<HtmlTableCellAttributes>;
+    th: PropsWithChildren<HtmlTableCellAttributes>;
+    thead: PropsWithChildren<HtmlGlobalAttributes>;
+    tbody: PropsWithChildren<HtmlGlobalAttributes>;
+
+    // HTML media elements (for mj-table - mj-image can't be used inside mj-table)
+    img: HtmlImgAttributes;
+
+    // HTML head elements (for mj-raw in mj-head - dark mode support)
+    meta: HtmlMetaAttributes;
   }
 }

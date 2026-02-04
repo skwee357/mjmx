@@ -1,6 +1,7 @@
 import { Fragment, isMjmlNode, type MjmlChild, type MjmlNode } from './ast';
 
 const SELF_CLOSING_TAGS = new Set([
+  // MJML
   'mj-all',
   'mj-breakpoint',
   'mj-carousel-image',
@@ -10,6 +11,11 @@ const SELF_CLOSING_TAGS = new Set([
   'mj-image',
   'mj-include',
   'mj-spacer',
+  // HTML void elements
+  'br',
+  'hr',
+  'img',
+  'meta',
 ]);
 
 function serializeAttributes(

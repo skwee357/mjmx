@@ -32,7 +32,7 @@
 ## Installation
 
 ```bash
-npm install @mjmx/core
+npm install @mjmx/core mjml
 ```
 
 ## Usage

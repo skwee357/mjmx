@@ -1,4 +1,12 @@
 export { Fragment, type MjmlChild, type MjmlNode } from './ast';
+export type {
+  HtmlAnchorAttributes,
+  HtmlGlobalAttributes,
+  HtmlImgAttributes,
+  HtmlListAttributes,
+  HtmlMetaAttributes,
+  HtmlTableCellAttributes,
+} from './html-types';
 export { jsx, jsxs, type JSX } from './jsx-runtime';
 export { render, type RenderOptions, type RenderResult } from './render';
 export { serialize } from './serialize';
