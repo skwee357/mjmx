@@ -1,6 +1,6 @@
 {
   "name": "@mjmx/core",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Write mjml using JSX syntax",
   "keywords": [
     "mjml",
