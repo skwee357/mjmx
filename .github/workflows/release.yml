@@ -27,19 +27,17 @@ jobs:
           cache: "pnpm"
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Build
         run: pnpm build
-
-      - name: Clear auth token for OIDC
-        run: echo "NODE_AUTH_TOKEN=" >> $GITHUB_ENV
 
       - name: Create Release Pull Request or Publish
         id: changesets
         uses: changesets/action@v1
         with:
-          publish: pnpm changeset publish
+          version: pnpm ci-version
+          publish: pnpm ci-publish
           title: "chore: version packages"
           commit: "chore: version packages"
         env:
