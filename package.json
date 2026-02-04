@@ -61,6 +61,8 @@
   ],
   "scripts": {
     "build": "tsup",
+    "ci-publish": "pnpm publish -r --access public && changeset tag",
+    "ci-version": "changeset version && pnpm install --no-frozen-lockfile",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint src",
