@@ -175,7 +175,10 @@ describe('JSX integration', () => {
   });
 
   it('should support PropsWithChildren for typed wrapper components', () => {
-    const Card = ({ children, title }: PropsWithChildren<{ title: string }>) => (
+    const Card = ({
+      children,
+      title,
+    }: PropsWithChildren<{ title: string }>) => (
       <mj-section>
         <mj-column>
           <mj-text font-weight="bold">{title}</mj-text>
@@ -193,8 +196,8 @@ describe('JSX integration', () => {
 
     expect(serialize(node)).toBe(
       '<mj-section><mj-column><mj-text font-weight="bold">Welcome</mj-text>' +
-      '<mj-image src="https://example.com/img.png" />' +
-      '<mj-text>Card body content</mj-text></mj-column></mj-section>'
+        '<mj-image src="https://example.com/img.png" />' +
+        '<mj-text>Card body content</mj-text></mj-column></mj-section>'
     );
   });
 });
