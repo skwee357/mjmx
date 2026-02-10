@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { isMjmlNode, type MjmlChild } from '../ast';
-import { Fragment, jsx, jsxs } from '../jsx-runtime';
+import { Fragment, jsx, jsxs, type PropsWithChildren } from '../jsx-runtime';
 import { serialize } from '../serialize';
 
 describe('jsx', () => {
@@ -171,6 +171,33 @@ describe('JSX integration', () => {
     );
     expect(serialize(node)).toBe(
       '<mj-section><mj-text>Wrapped</mj-text></mj-section>'
+    );
+  });
+
+  it('should support PropsWithChildren for typed wrapper components', () => {
+    const Card = ({
+      children,
+      title,
+    }: PropsWithChildren<{ title: string }>) => (
+      <mj-section>
+        <mj-column>
+          <mj-text font-weight="bold">{title}</mj-text>
+          {children}
+        </mj-column>
+      </mj-section>
+    );
+
+    const node = (
+      <Card title="Welcome">
+        <mj-image src="https://example.com/img.png" />
+        <mj-text>Card body content</mj-text>
+      </Card>
+    );
+
+    expect(serialize(node)).toBe(
+      '<mj-section><mj-column><mj-text font-weight="bold">Welcome</mj-text>' +
+        '<mj-image src="https://example.com/img.png" />' +
+        '<mj-text>Card body content</mj-text></mj-column></mj-section>'
     );
   });
 });

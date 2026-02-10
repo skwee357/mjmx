@@ -49,7 +49,7 @@ import type {
 
 export { Fragment };
 
-type PropsWithChildren<T = object> = T & { children?: MjmlChild };
+export type PropsWithChildren<T = object> = T & { children?: MjmlChild };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Component = (props: any) => MjmlNode;
