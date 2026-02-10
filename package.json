@@ -87,7 +87,7 @@
   "peerDependencies": {
     "mjml": "^4.15.3"
   },
-  "packageManager": "pnpm@10.28.2",
+  "packageManager": "pnpm@10.29.2",
   "engines": {
     "node": ">=20"
   },
