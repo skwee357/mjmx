@@ -7,7 +7,7 @@ export type {
   HtmlMetaAttributes,
   HtmlTableCellAttributes,
 } from './html-types';
-export { jsx, jsxs, type JSX } from './jsx-runtime';
+export { jsx, jsxs, type JSX, type PropsWithChildren } from './jsx-runtime';
 export { render, type RenderOptions, type RenderResult } from './render';
 export { serialize } from './serialize';
 
