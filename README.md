@@ -13,8 +13,6 @@
     <b>No dependency on react</b>
 </p>
 
-> This project was developed with the help of [Claude Code](https://claude.ai/).
-
 ## Table of Contents
 
 - [Installation](#installation)
