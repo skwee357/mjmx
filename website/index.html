@@ -8,7 +8,10 @@
       name="description"
       content="mjmx is a JSX runtime for generating MJML email templates. No React dependency, full TypeScript support, 40+ strictly typed components."
     />
-    <meta property="og:title" content="mjmx — JSX Runtime for MJML Email Templates" />
+    <meta
+      property="og:title"
+      content="mjmx — JSX Runtime for MJML Email Templates"
+    />
     <meta
       property="og:description"
       content="Pure JSX runtime for MJML. No React required. Full TypeScript support with template literal types."
@@ -57,8 +60,10 @@
         --color-green: #3fb950;
         --color-purple: #bc8cff;
         --color-orange: #d29922;
-        --font-body: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        --font-mono: "IBM Plex Mono", "Fira Code", "Cascadia Code", monospace;
+        --font-body:
+          'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+          sans-serif;
+        --font-mono: 'IBM Plex Mono', 'Fira Code', 'Cascadia Code', monospace;
         --max-width: 1100px;
         --radius: 8px;
       }
@@ -305,9 +310,9 @@
         overflow-x: auto;
       }
 
-      #tab-basic:checked ~ .tab-bar label[for="tab-basic"],
-      #tab-composition:checked ~ .tab-bar label[for="tab-composition"],
-      #tab-comparison:checked ~ .tab-bar label[for="tab-comparison"] {
+      #tab-basic:checked ~ .tab-bar label[for='tab-basic'],
+      #tab-composition:checked ~ .tab-bar label[for='tab-composition'],
+      #tab-comparison:checked ~ .tab-bar label[for='tab-comparison'] {
         color: var(--color-accent);
         border-bottom-color: var(--color-accent);
       }
@@ -507,7 +512,9 @@
     <header class="hero">
       <div class="container">
         <h1 class="hero-title">mjmx</h1>
-        <p class="hero-tagline">JSX runtime for MJML email templates. No React required.</p>
+        <p class="hero-tagline">
+          JSX runtime for MJML email templates. No React required.
+        </p>
         <div class="install-box">
           <span class="dollar">$</span>
           <code id="install-cmd">npm install @mjmx/core mjml</code>
@@ -560,8 +567,13 @@
           </a>
         </div>
         <div class="badges">
-          <a href="https://www.npmjs.com/package/@mjmx/core" target="_blank" rel="noopener"
-            ><img src="https://img.shields.io/npm/v/@mjmx/core" alt="npm version"
+          <a
+            href="https://www.npmjs.com/package/@mjmx/core"
+            target="_blank"
+            rel="noopener"
+            ><img
+              src="https://img.shields.io/npm/v/@mjmx/core"
+              alt="npm version"
           /></a>
           <img src="https://img.shields.io/npm/l/@mjmx/core" alt="license" />
           <a
@@ -572,7 +584,10 @@
               src="https://github.com/skwee357/mjmx/actions/workflows/ci.yml/badge.svg"
               alt="CI"
           /></a>
-          <a href="https://codecov.io/gh/skwee357/mjmx" target="_blank" rel="noopener"
+          <a
+            href="https://codecov.io/gh/skwee357/mjmx"
+            target="_blank"
+            rel="noopener"
             ><img
               src="https://codecov.io/gh/skwee357/mjmx/branch/main/graph/badge.svg"
               alt="codecov"
@@ -599,7 +614,9 @@
               <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
             </svg>
             <h3>Zero React Dependency</h3>
-            <p>Pure JSX runtime with its own AST. No react or react-dom needed.</p>
+            <p>
+              Pure JSX runtime with its own AST. No react or react-dom needed.
+            </p>
           </div>
           <div class="feature-card">
             <svg
@@ -616,7 +633,8 @@
             </svg>
             <h3>Full TypeScript Support</h3>
             <p>
-              Template literal types for CSS values, colors, percentages. Autocomplete that works.
+              Template literal types for CSS values, colors, percentages.
+              Autocomplete that works.
             </p>
           </div>
           <div class="feature-card">
@@ -635,7 +653,10 @@
               <rect x="14" y="14" width="7" height="7" rx="1" />
             </svg>
             <h3>All MJML Components</h3>
-            <p>40+ components with strictly typed attributes. Every MJML tag, fully supported.</p>
+            <p>
+              40+ components with strictly typed attributes. Every MJML tag,
+              fully supported.
+            </p>
           </div>
           <div class="feature-card">
             <svg
@@ -653,7 +674,10 @@
               <line x1="3" y1="21" x2="10" y2="14" />
             </svg>
             <h3>Component Composition</h3>
-            <p>Reusable email components with PropsWithChildren, fragments, and conditionals.</p>
+            <p>
+              Reusable email components with PropsWithChildren, fragments, and
+              conditionals.
+            </p>
           </div>
           <div class="feature-card">
             <svg
@@ -669,7 +693,10 @@
               <line x1="12" y1="3" x2="12" y2="21" />
             </svg>
             <h3>Two Render Modes</h3>
-            <p><code>render()</code> for HTML output, <code>serialize()</code> for MJML strings.</p>
+            <p>
+              <code>render()</code> for HTML output,
+              <code>serialize()</code> for MJML strings.
+            </p>
           </div>
           <div class="feature-card">
             <svg
@@ -693,8 +720,19 @@
     <section id="examples">
       <div class="container">
         <h2 class="section-title">Code Examples</h2>
-        <input type="radio" name="tabs" id="tab-basic" checked class="tab-radio" />
-        <input type="radio" name="tabs" id="tab-composition" class="tab-radio" />
+        <input
+          type="radio"
+          name="tabs"
+          id="tab-basic"
+          checked
+          class="tab-radio"
+        />
+        <input
+          type="radio"
+          name="tabs"
+          id="tab-composition"
+          class="tab-radio"
+        />
         <input type="radio" name="tabs" id="tab-comparison" class="tab-radio" />
         <div class="tab-bar">
           <label for="tab-basic" class="tab-btn">Basic Email</label>
@@ -857,10 +895,25 @@
 
     <footer>
       <div class="container">
-        <p>Built by <a href="https://kudmitry.com" target="_blank" rel="noopener">skwee357</a></p>
+        <p>
+          Built by
+          <a href="https://kudmitry.com" target="_blank" rel="noopener"
+            >skwee357</a
+          >
+        </p>
         <div class="footer-links">
-          <a href="https://github.com/skwee357/mjmx" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://www.npmjs.com/package/@mjmx/core" target="_blank" rel="noopener">NPM</a>
+          <a
+            href="https://github.com/skwee357/mjmx"
+            target="_blank"
+            rel="noopener"
+            >GitHub</a
+          >
+          <a
+            href="https://www.npmjs.com/package/@mjmx/core"
+            target="_blank"
+            rel="noopener"
+            >NPM</a
+          >
           <a
             href="https://github.com/skwee357/mjmx/blob/main/LICENSE"
             target="_blank"
@@ -873,13 +926,13 @@
 
     <script>
       function copyInstall() {
-        const text = document.getElementById("install-cmd").textContent;
+        const text = document.getElementById('install-cmd').textContent;
         navigator.clipboard.writeText(text).then(() => {
-          document.getElementById("copy-icon").style.display = "none";
-          document.getElementById("check-icon").style.display = "block";
+          document.getElementById('copy-icon').style.display = 'none';
+          document.getElementById('check-icon').style.display = 'block';
           setTimeout(() => {
-            document.getElementById("copy-icon").style.display = "block";
-            document.getElementById("check-icon").style.display = "none";
+            document.getElementById('copy-icon').style.display = 'block';
+            document.getElementById('check-icon').style.display = 'none';
           }, 2000);
         });
       }
