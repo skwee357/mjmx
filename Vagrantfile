@@ -32,7 +32,6 @@ Vagrant.configure('2') do |config|
 
     corepack enable
     corepack prepare pnpm@latest --activate
-
   SHELL
 
   config.vm.provision('shell', privileged: false, inline: <<-SHELL)

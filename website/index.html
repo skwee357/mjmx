@@ -1,0 +1,888 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mjmx — JSX Runtime for MJML Email Templates</title>
+    <meta
+      name="description"
+      content="mjmx is a JSX runtime for generating MJML email templates. No React dependency, full TypeScript support, 40+ strictly typed components."
+    />
+    <meta property="og:title" content="mjmx — JSX Runtime for MJML Email Templates" />
+    <meta
+      property="og:description"
+      content="Pure JSX runtime for MJML. No React required. Full TypeScript support with template literal types."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://github.com/skwee357/mjmx" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='70' font-family='monospace' fill='%2358a6ff'>mx</text></svg>"
+    />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-sans@5/400.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-sans@5/500.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-sans@5/600.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-sans@5/700.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-mono@5/400.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-mono@5/500.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --color-bg: #0d1117;
+        --color-surface: #161b22;
+        --color-surface-hover: #1c2129;
+        --color-border: #30363d;
+        --color-text: #e6edf3;
+        --color-text-muted: #8b949e;
+        --color-accent: #f0883e;
+        --color-accent-hover: #f4a261;
+        --color-green: #3fb950;
+        --color-purple: #bc8cff;
+        --color-orange: #d29922;
+        --font-body: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        --font-mono: "IBM Plex Mono", "Fira Code", "Cascadia Code", monospace;
+        --max-width: 1100px;
+        --radius: 8px;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--font-body);
+        background: var(--color-bg);
+        color: var(--color-text);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      a {
+        color: var(--color-accent);
+        text-decoration: none;
+      }
+      a:hover {
+        color: var(--color-accent-hover);
+      }
+
+      .hero {
+        text-align: center;
+        padding: 100px 24px 80px;
+      }
+
+      .hero-title {
+        font-size: clamp(3rem, 8vw, 5rem);
+        font-weight: 700;
+        font-family: var(--font-mono);
+        color: var(--color-accent);
+        letter-spacing: -2px;
+        margin-bottom: 16px;
+      }
+
+      .hero-tagline {
+        font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+        color: var(--color-text-muted);
+        max-width: 560px;
+        margin: 0 auto 32px;
+      }
+
+      .install-box {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius);
+        padding: 12px 16px;
+        font-family: var(--font-mono);
+        font-size: 0.95rem;
+        margin-bottom: 32px;
+      }
+
+      .install-box code {
+        color: var(--color-text);
+        user-select: all;
+      }
+
+      .install-box .dollar {
+        color: var(--color-text-muted);
+        user-select: none;
+      }
+
+      .copy-btn {
+        background: none;
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+        color: var(--color-text-muted);
+        cursor: pointer;
+        padding: 4px 8px;
+        display: flex;
+        align-items: center;
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+      }
+
+      .copy-btn:hover {
+        color: var(--color-text);
+        border-color: var(--color-text-muted);
+      }
+
+      .copy-btn svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .cta-row {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 32px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 24px;
+        border-radius: var(--radius);
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition:
+          background 0.2s,
+          border-color 0.2s;
+      }
+
+      .btn-primary {
+        background: var(--color-accent);
+        color: var(--color-bg);
+      }
+
+      .btn-primary:hover {
+        background: var(--color-accent-hover);
+        color: var(--color-bg);
+      }
+
+      .btn-secondary {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        color: var(--color-text);
+      }
+
+      .btn-secondary:hover {
+        border-color: var(--color-text-muted);
+        color: var(--color-text);
+      }
+
+      .badges {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .badges img {
+        height: 20px;
+      }
+
+      section {
+        padding: 80px 0;
+      }
+
+      .section-title {
+        font-size: 2rem;
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 48px;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+      }
+
+      .feature-card {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius);
+        padding: 24px;
+        transition: border-color 0.2s;
+      }
+
+      .feature-card:hover {
+        border-color: var(--color-text-muted);
+      }
+
+      .feature-icon {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 16px;
+        color: var(--color-accent);
+      }
+
+      .feature-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+      }
+
+      .feature-card p {
+        color: var(--color-text-muted);
+        font-size: 0.9rem;
+        line-height: 1.5;
+      }
+
+      .tab-radio {
+        display: none;
+      }
+
+      .tab-bar {
+        display: flex;
+        gap: 0;
+        border-bottom: 1px solid var(--color-border);
+        margin-bottom: 0;
+        overflow-x: auto;
+      }
+
+      .tab-btn {
+        border-bottom: 2px solid transparent;
+        color: var(--color-text-muted);
+        font-family: var(--font-body);
+        font-size: 0.9rem;
+        font-weight: 500;
+        padding: 12px 20px;
+        cursor: pointer;
+        white-space: nowrap;
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+      }
+
+      .tab-btn:hover {
+        color: var(--color-text);
+      }
+
+      .tab-panel {
+        display: none;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-top: none;
+        border-radius: 0 0 var(--radius) var(--radius);
+        padding: 24px;
+        overflow-x: auto;
+      }
+
+      #tab-basic:checked ~ .tab-bar label[for="tab-basic"],
+      #tab-composition:checked ~ .tab-bar label[for="tab-composition"],
+      #tab-comparison:checked ~ .tab-bar label[for="tab-comparison"] {
+        color: var(--color-accent);
+        border-bottom-color: var(--color-accent);
+      }
+
+      #tab-basic:checked ~ #panel-basic,
+      #tab-composition:checked ~ #panel-composition,
+      #tab-comparison:checked ~ #panel-comparison {
+        display: block;
+      }
+
+      .tab-panel pre {
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+        line-height: 1.7;
+        overflow-x: auto;
+        min-width: 0;
+      }
+
+      .kw {
+        color: #ff7b72;
+      }
+      .fn {
+        color: #d2a8ff;
+      }
+      .str {
+        color: #a5d6ff;
+      }
+      .tag {
+        color: #7ee787;
+      }
+      .attr {
+        color: #79c0ff;
+      }
+      .val {
+        color: #a5d6ff;
+      }
+      .cmt {
+        color: #8b949e;
+        font-style: italic;
+      }
+      .type {
+        color: #ff7b72;
+      }
+      .punct {
+        color: #8b949e;
+      }
+
+      .comparison {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .comparison-col h4 {
+        font-size: 0.85rem;
+        color: var(--color-text-muted);
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .comparison-col pre {
+        background: var(--color-bg);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius);
+        padding: 16px;
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+        line-height: 1.7;
+        overflow-x: auto;
+      }
+
+      .steps {
+        display: grid;
+        gap: 24px;
+        max-width: 720px;
+        margin: 0 auto;
+      }
+
+      .step {
+        background: var(--color-surface);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius);
+        padding: 24px;
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        gap: 16px;
+        align-items: start;
+      }
+
+      .step-num {
+        width: 48px;
+        height: 48px;
+        background: var(--color-bg);
+        border: 2px solid var(--color-accent);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-mono);
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: var(--color-accent);
+        flex-shrink: 0;
+      }
+
+      .step h3 {
+        font-size: 1.05rem;
+        margin-bottom: 8px;
+      }
+
+      .step p {
+        color: var(--color-text-muted);
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+      }
+
+      .step pre {
+        background: var(--color-bg);
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+        padding: 12px 16px;
+        font-family: var(--font-mono);
+        font-size: 0.82rem;
+        line-height: 1.6;
+        overflow-x: auto;
+        min-width: 0;
+      }
+
+      .step > div {
+        min-width: 0;
+      }
+
+      footer {
+        border-top: 1px solid var(--color-border);
+        padding: 32px 0;
+        text-align: center;
+        color: var(--color-text-muted);
+        font-size: 0.85rem;
+      }
+
+      footer a {
+        color: var(--color-text-muted);
+      }
+      footer a:hover {
+        color: var(--color-text);
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 24px;
+        justify-content: center;
+        margin-top: 8px;
+      }
+
+      @media (max-width: 768px) {
+        .hero {
+          padding: 64px 24px 48px;
+        }
+        .container {
+          padding: 0 12px;
+        }
+        .install-box {
+          font-size: 0.8rem;
+          padding: 8px 10px;
+          gap: 6px;
+        }
+        section {
+          padding: 48px 0;
+        }
+        .comparison {
+          grid-template-columns: 1fr;
+        }
+        .tab-panel {
+          padding: 16px;
+        }
+        .tab-panel pre {
+          font-size: 0.75rem;
+        }
+        .step {
+          grid-template-columns: 1fr;
+          text-align: center;
+          padding: 16px;
+        }
+        .step-num {
+          margin: 0 auto;
+        }
+        .step pre {
+          font-size: 0.75rem;
+          padding: 10px 12px;
+          text-align: left;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="container">
+        <h1 class="hero-title">mjmx</h1>
+        <p class="hero-tagline">JSX runtime for MJML email templates. No React required.</p>
+        <div class="install-box">
+          <span class="dollar">$</span>
+          <code id="install-cmd">npm install @mjmx/core mjml</code>
+          <button
+            class="copy-btn"
+            onclick="copyInstall()"
+            title="Copy to clipboard"
+            aria-label="Copy install command"
+          >
+            <svg
+              id="copy-icon"
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="5" y="5" width="9" height="9" rx="1.5" />
+              <path d="M3 11V3a1.5 1.5 0 011.5-1.5H11" />
+            </svg>
+            <svg
+              id="check-icon"
+              viewBox="0 0 16 16"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="display: none; color: var(--color-green)"
+            >
+              <polyline points="3 8 7 12 13 4" />
+            </svg>
+          </button>
+        </div>
+        <div class="cta-row">
+          <a href="#getting-started" class="btn btn-primary">Get Started</a>
+          <a
+            href="https://github.com/skwee357/mjmx"
+            class="btn btn-secondary"
+            target="_blank"
+            rel="noopener"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+              <path
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+              />
+            </svg>
+            GitHub
+          </a>
+        </div>
+        <div class="badges">
+          <a href="https://www.npmjs.com/package/@mjmx/core" target="_blank" rel="noopener"
+            ><img src="https://img.shields.io/npm/v/@mjmx/core" alt="npm version"
+          /></a>
+          <img src="https://img.shields.io/npm/l/@mjmx/core" alt="license" />
+          <a
+            href="https://github.com/skwee357/mjmx/actions/workflows/ci.yml"
+            target="_blank"
+            rel="noopener"
+            ><img
+              src="https://github.com/skwee357/mjmx/actions/workflows/ci.yml/badge.svg"
+              alt="CI"
+          /></a>
+          <a href="https://codecov.io/gh/skwee357/mjmx" target="_blank" rel="noopener"
+            ><img
+              src="https://codecov.io/gh/skwee357/mjmx/branch/main/graph/badge.svg"
+              alt="codecov"
+          /></a>
+        </div>
+      </div>
+    </header>
+
+    <section id="features">
+      <div class="container">
+        <h2 class="section-title">Features</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <svg
+              class="feature-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
+            </svg>
+            <h3>Zero React Dependency</h3>
+            <p>Pure JSX runtime with its own AST. No react or react-dom needed.</p>
+          </div>
+          <div class="feature-card">
+            <svg
+              class="feature-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="4 17 10 11 4 5" />
+              <line x1="12" y1="19" x2="20" y2="19" />
+            </svg>
+            <h3>Full TypeScript Support</h3>
+            <p>
+              Template literal types for CSS values, colors, percentages. Autocomplete that works.
+            </p>
+          </div>
+          <div class="feature-card">
+            <svg
+              class="feature-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="3" width="7" height="7" rx="1" />
+              <rect x="14" y="3" width="7" height="7" rx="1" />
+              <rect x="3" y="14" width="7" height="7" rx="1" />
+              <rect x="14" y="14" width="7" height="7" rx="1" />
+            </svg>
+            <h3>All MJML Components</h3>
+            <p>40+ components with strictly typed attributes. Every MJML tag, fully supported.</p>
+          </div>
+          <div class="feature-card">
+            <svg
+              class="feature-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M16 3h5v5" />
+              <line x1="21" y1="3" x2="14" y2="10" />
+              <path d="M8 21H3v-5" />
+              <line x1="3" y1="21" x2="10" y2="14" />
+            </svg>
+            <h3>Component Composition</h3>
+            <p>Reusable email components with PropsWithChildren, fragments, and conditionals.</p>
+          </div>
+          <div class="feature-card">
+            <svg
+              class="feature-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M8 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-3" />
+              <line x1="12" y1="3" x2="12" y2="21" />
+            </svg>
+            <h3>Two Render Modes</h3>
+            <p><code>render()</code> for HTML output, <code>serialize()</code> for MJML strings.</p>
+          </div>
+          <div class="feature-card">
+            <svg
+              class="feature-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+            </svg>
+            <h3>Lightweight &amp; Fast</h3>
+            <p>Pure string manipulation. No virtual DOM, no reconciler.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="examples">
+      <div class="container">
+        <h2 class="section-title">Code Examples</h2>
+        <input type="radio" name="tabs" id="tab-basic" checked class="tab-radio" />
+        <input type="radio" name="tabs" id="tab-composition" class="tab-radio" />
+        <input type="radio" name="tabs" id="tab-comparison" class="tab-radio" />
+        <div class="tab-bar">
+          <label for="tab-basic" class="tab-btn">Basic Email</label>
+          <label for="tab-composition" class="tab-btn">Composition</label>
+          <label for="tab-comparison" class="tab-btn">mjmx vs MJML</label>
+        </div>
+        <div class="tab-panel" id="panel-basic">
+          <pre><span class="kw">import</span> { <span class="fn">render</span> } <span class="kw">from</span> <span class="str">'@mjmx/core'</span>;
+
+<span class="kw">const</span> <span class="fn">Email</span> = ({ <span class="attr">name</span> }: { <span class="attr">name</span>: <span class="type">string</span> }) =&gt; (
+  <span class="tag">&lt;mjml&gt;</span>
+    <span class="tag">&lt;mj-body&gt;</span>
+      <span class="tag">&lt;mj-section&gt;</span>
+        <span class="tag">&lt;mj-column&gt;</span>
+          <span class="tag">&lt;mj-text</span> <span class="attr">font-size</span>=<span class="val">"20px"</span> <span class="attr">color</span>=<span class="val">"#333"</span><span class="tag">&gt;</span>
+            Hello {<span class="attr">name</span>}!
+          <span class="tag">&lt;/mj-text&gt;</span>
+          <span class="tag">&lt;mj-button</span> <span class="attr">href</span>=<span class="val">"https://example.com"</span><span class="tag">&gt;</span>Click me<span class="tag">&lt;/mj-button&gt;</span>
+        <span class="tag">&lt;/mj-column&gt;</span>
+      <span class="tag">&lt;/mj-section&gt;</span>
+    <span class="tag">&lt;/mj-body&gt;</span>
+  <span class="tag">&lt;/mjml&gt;</span>
+);
+
+<span class="kw">const</span> { <span class="attr">html</span>, <span class="attr">errors</span> } = <span class="fn">render</span>(<span class="tag">&lt;Email</span> <span class="attr">name</span>=<span class="val">"World"</span> <span class="tag">/&gt;</span>);</pre>
+        </div>
+        <div class="tab-panel" id="panel-composition">
+          <pre><span class="kw">import</span> { <span class="fn">render</span>, <span class="kw">type</span> <span class="type">PropsWithChildren</span> } <span class="kw">from</span> <span class="str">'@mjmx/core'</span>;
+
+<span class="kw">const</span> <span class="fn">Card</span> = ({ <span class="attr">children</span>, <span class="attr">title</span> }: <span class="type">PropsWithChildren</span>&lt;{ <span class="attr">title</span>: <span class="type">string</span> }&gt;) =&gt; (
+  <span class="tag">&lt;mj-section&gt;</span>
+    <span class="tag">&lt;mj-column&gt;</span>
+      <span class="tag">&lt;mj-text</span> <span class="attr">font-weight</span>=<span class="val">"bold"</span><span class="tag">&gt;</span>{<span class="attr">title</span>}<span class="tag">&lt;/mj-text&gt;</span>
+      {<span class="attr">children</span>}
+    <span class="tag">&lt;/mj-column&gt;</span>
+  <span class="tag">&lt;/mj-section&gt;</span>
+);
+
+<span class="kw">const</span> <span class="fn">Header</span> = () =&gt; (
+  <span class="tag">&lt;mj-section</span> <span class="attr">background-color</span>=<span class="val">"#2c3e50"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;mj-column&gt;</span>
+      <span class="tag">&lt;mj-text</span> <span class="attr">color</span>=<span class="val">"#fff"</span> <span class="attr">font-size</span>=<span class="val">"24px"</span><span class="tag">&gt;</span>My App<span class="tag">&lt;/mj-text&gt;</span>
+    <span class="tag">&lt;/mj-column&gt;</span>
+  <span class="tag">&lt;/mj-section&gt;</span>
+);
+
+<span class="kw">const</span> <span class="fn">WelcomeEmail</span> = ({ <span class="attr">name</span> }: { <span class="attr">name</span>: <span class="type">string</span> }) =&gt; (
+  <span class="tag">&lt;mjml&gt;</span>
+    <span class="tag">&lt;mj-body&gt;</span>
+      <span class="tag">&lt;Header /&gt;</span>
+      <span class="tag">&lt;Card</span> <span class="attr">title</span>=<span class="val">"Welcome!"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;mj-text&gt;</span>Hello {<span class="attr">name</span>}, thanks for joining.<span class="tag">&lt;/mj-text&gt;</span>
+      <span class="tag">&lt;/Card&gt;</span>
+    <span class="tag">&lt;/mj-body&gt;</span>
+  <span class="tag">&lt;/mjml&gt;</span>
+);</pre>
+        </div>
+        <div class="tab-panel" id="panel-comparison">
+          <div class="comparison">
+            <div class="comparison-col">
+              <h4>mjmx (JSX)</h4>
+              <pre><span class="kw">const</span> <span class="fn">OrderEmail</span> = ({ <span class="attr">items</span> }: <span class="type">Props</span>) =&gt; (
+  <span class="tag">&lt;mjml&gt;</span>
+    <span class="tag">&lt;mj-body&gt;</span>
+      <span class="tag">&lt;mj-section&gt;</span>
+        {<span class="attr">items</span>.<span class="fn">map</span>(<span class="attr">item</span> =&gt; (
+          <span class="tag">&lt;mj-column&gt;</span>
+            <span class="tag">&lt;mj-text&gt;</span>{<span class="attr">item</span>.<span class="attr">name</span>}<span class="tag">&lt;/mj-text&gt;</span>
+            <span class="tag">&lt;mj-text&gt;</span>{<span class="attr">item</span>.<span class="attr">price</span>}<span class="tag">&lt;/mj-text&gt;</span>
+          <span class="tag">&lt;/mj-column&gt;</span>
+        ))}
+      <span class="tag">&lt;/mj-section&gt;</span>
+    <span class="tag">&lt;/mj-body&gt;</span>
+  <span class="tag">&lt;/mjml&gt;</span>
+);</pre>
+            </div>
+            <div class="comparison-col">
+              <h4>MJML + Handlebars</h4>
+              <pre><span class="tag">&lt;mjml&gt;</span>
+  <span class="tag">&lt;mj-body&gt;</span>
+    <span class="tag">&lt;mj-section&gt;</span>
+      <span class="cmt">{{#each items}}</span>
+      <span class="tag">&lt;mj-column&gt;</span>
+        <span class="tag">&lt;mj-text&gt;</span><span class="cmt">{{this.name}}</span><span class="tag">&lt;/mj-text&gt;</span>
+        <span class="tag">&lt;mj-text&gt;</span><span class="cmt">{{this.price}}</span><span class="tag">&lt;/mj-text&gt;</span>
+      <span class="tag">&lt;/mj-column&gt;</span>
+      <span class="cmt">{{/each}}</span>
+    <span class="tag">&lt;/mj-section&gt;</span>
+  <span class="tag">&lt;/mj-body&gt;</span>
+<span class="tag">&lt;/mjml&gt;</span>
+
+<span class="cmt">&lt;!-- No type safety --&gt;</span>
+<span class="cmt">&lt;!-- No autocomplete --&gt;</span>
+<span class="cmt">&lt;!-- No component reuse --&gt;</span></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="getting-started">
+      <div class="container">
+        <h2 class="section-title">Getting Started</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div>
+              <h3>Install</h3>
+              <p>Add mjmx and mjml to your project.</p>
+              <pre><span class="dollar" style="color:var(--color-text-muted)">$</span> <span class="fn">npm install</span> @mjmx/core mjml</pre>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div>
+              <h3>Configure TypeScript</h3>
+              <p>Set the JSX transform in your tsconfig.json.</p>
+              <pre>{
+  <span class="attr">"compilerOptions"</span>: {
+    <span class="attr">"jsx"</span>: <span class="str">"react-jsx"</span>,
+    <span class="attr">"jsxImportSource"</span>: <span class="str">"@mjmx/core"</span>
+  }
+}</pre>
+              <p style="margin-top: 8px">
+                Or use the pragma:
+                <code
+                  style="
+                    font-family: var(--font-mono);
+                    color: var(--color-text-muted);
+                    font-size: 0.85rem;
+                  "
+                  >/** @jsxImportSource @mjmx/core */</code
+                >
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div>
+              <h3>Write Your First Email</h3>
+              <p>Create a component and render it to HTML.</p>
+              <pre><span class="kw">import</span> { <span class="fn">render</span> } <span class="kw">from</span> <span class="str">'@mjmx/core'</span>;
+
+<span class="kw">const</span> { <span class="attr">html</span> } = <span class="fn">render</span>(
+  <span class="tag">&lt;mjml&gt;</span>
+    <span class="tag">&lt;mj-body&gt;</span>
+      <span class="tag">&lt;mj-section&gt;</span>
+        <span class="tag">&lt;mj-column&gt;</span>
+          <span class="tag">&lt;mj-text&gt;</span>Hello World!<span class="tag">&lt;/mj-text&gt;</span>
+        <span class="tag">&lt;/mj-column&gt;</span>
+      <span class="tag">&lt;/mj-section&gt;</span>
+    <span class="tag">&lt;/mj-body&gt;</span>
+  <span class="tag">&lt;/mjml&gt;</span>
+);</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <p>Built by <a href="https://kudmitry.com" target="_blank" rel="noopener">skwee357</a></p>
+        <div class="footer-links">
+          <a href="https://github.com/skwee357/mjmx" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.npmjs.com/package/@mjmx/core" target="_blank" rel="noopener">NPM</a>
+          <a
+            href="https://github.com/skwee357/mjmx/blob/main/LICENSE"
+            target="_blank"
+            rel="noopener"
+            >MIT License</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      function copyInstall() {
+        const text = document.getElementById("install-cmd").textContent;
+        navigator.clipboard.writeText(text).then(() => {
+          document.getElementById("copy-icon").style.display = "none";
+          document.getElementById("check-icon").style.display = "block";
+          setTimeout(() => {
+            document.getElementById("copy-icon").style.display = "block";
+            document.getElementById("check-icon").style.display = "none";
+          }, 2000);
+        });
+      }
+    </script>
+  </body>
+</html>
