@@ -19,7 +19,6 @@
     "outDir": "./dist",
     "jsx": "react-jsx",
     "jsxImportSource": "@mjmx/core",
-    "baseUrl": ".",
     "paths": {
       "@mjmx/core": ["./src/index.ts"],
       "@mjmx/core/jsx-runtime": ["./src/jsx-runtime.ts"],

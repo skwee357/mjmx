@@ -1,0 +1,37 @@
+name: Post-merge Dependabot Changeset
+
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  changeset:
+    if: github.event.pull_request.merged == true && github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Generate changeset
+        run: |
+          DEP_NAME=$(echo "${{ github.event.pull_request.title }}" | sed 's/chore(deps): bump //' | sed 's/ from .*//')
+          mkdir -p .changeset
+          FILENAME=".changeset/dependabot-$(date +%s).md"
+          cat > "$FILENAME" << EOF
+          ---
+          "@mjmx/core": patch
+          ---
+
+          chore(deps): update ${DEP_NAME}
+          EOF
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .changeset
+          git commit -m "Add changeset for dependabot update"
+          git push
