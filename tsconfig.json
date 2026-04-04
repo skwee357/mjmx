@@ -24,7 +24,8 @@
       "@mjmx/core/jsx-runtime": ["./src/jsx-runtime.ts"],
       "@mjmx/core/jsx-dev-runtime": ["./src/jsx-dev-runtime.ts"]
     },
-    "types": ["vitest/globals", "node"]
+    "types": ["vitest/globals", "node"],
+    "ignoreDeprecations": "6.0"
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist"]
