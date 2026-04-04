@@ -8,6 +8,12 @@ on:
   pull_request_target:
     branches: [main]
 
+permissions:
+  contents: read
+  checks: write
+  statuses: write
+  pull-requests: read
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
