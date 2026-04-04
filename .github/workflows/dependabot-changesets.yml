@@ -17,4 +17,4 @@ jobs:
     steps:
       - uses: feelepxyz/dependabot-changesets@v1
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}
